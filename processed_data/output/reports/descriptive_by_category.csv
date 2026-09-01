@@ -1,4 +1,0 @@
-﻿category,n_raw_rows,n_eligible_pairs,pair_fraction_pct,SPM72_min_Wm2,SPM72_max_Wm2,PV_Rear_min,PV_Rear_max,pearson_r,spearman_rho,sync_abs_median_s,sync_abs_max_s,sync_within_tolerance_pct,duration_s,median_interval_s,max_gap_s,n_gaps_over_60s
-dynamic_C1,109,109,100.0,61.0,791.0,113.6,123.5,0.39227480153259775,0.966347814945779,2.505,8.325,100.0,3361.0,30.0,60.0,0
-local_shading,85,85,100.0,26.0,379.0,8.7,68.1,0.7285953028842123,0.8770262317345583,2.585,7.155,100.0,3781.0,30.0,151.0,11
-unknown,1674,1674,100.0,19.0,824.0,5.5,129.3,0.991695298709007,0.9918717076814174,3.1205,7.772,100.0,379602.0,30.0,143600.0,9
