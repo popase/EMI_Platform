@@ -1,0 +1,43 @@
+EMI Platform — Final linear calibration performance and frozen coefficients
+==============================================================================
+
+MODEL STATUS: FROZEN
+Model ID: EMI-LIN-2026-08-26
+
+Equation:
+  G = 6.550183385298 * I + (-37.577182152696)
+
+where I = PV_Rear current [mA] and G = estimated irradiance [W/m²].
+
+Coefficients estimated exclusively from calibration_dataset.csv by OLS.
+Validation observations were not used to estimate or modify coefficients.
+
+Coefficient uncertainty (95% normal approximation):
+  slope     = 6.550183385298  [6.430368050563, 6.669998720032]
+  intercept = -37.577182152696  [-48.042423775817, -27.111940529574]
+
+Final performance:
+    Dataset    N  Mean_G_Wm2  Range_G_Wm2   MAE_Wm2  RMSE_Wm2   MBE_Wm2  nMAE_mean_pct  nRMSE_mean_pct  nMBE_mean_pct  RRMSE_range_pct       R2  Pearson_r  P50_AE_Wm2  P90_AE_Wm2  P95_AE_Wm2  P99_AE_Wm2  Max_AE_Wm2
+Calibration 1044  509.200192   730.000000 20.253887 50.733452 -0.000000       3.977588        9.963361      -0.000000         6.949788 0.916796   0.957494   14.914471   32.007665   35.960220   80.039570  660.589072
+ Validation  583  302.360206   805.000000 25.666847 36.070587  4.444635       8.488831       11.929674       1.469980         4.480818 0.979114   0.990398   22.415862   39.807399   59.757951  132.105697  331.303691
+
+Validation error coverage:
+ Absolute error limit [W/m²]  Validation fraction [%]
+                          10                   20.755
+                          20                   36.535
+                          30                   77.530
+                          50                   94.168
+                          75                   96.913
+                         100                   97.256
+
+Validation by series:
+series_id   N  Mean_G_Wm2  Range_G_Wm2   MAE_Wm2  RMSE_Wm2    MBE_Wm2  nMAE_mean_pct  nRMSE_mean_pct  nMBE_mean_pct  RRMSE_range_pct        R2  Pearson_r  P50_AE_Wm2  P90_AE_Wm2  P95_AE_Wm2  P99_AE_Wm2  Max_AE_Wm2
+    S08-A 139  166.697842   114.000000 24.688221 24.913100  24.326407      14.810163       14.945064      14.593114        21.853596  0.127589   0.990236   25.752708   27.661851   28.047873   29.259859   29.752708
+    S08-B  58  504.896552   550.000000 18.949330 33.324247   5.258185       3.753111        6.600213       1.041438         6.058954  0.967332   0.986217    8.471233   50.402418   76.078130  118.756553  131.345258
+      S09 143  616.118881   694.000000 25.040401 51.274566   5.361202       4.064216        8.322187       0.870157         7.388266  0.937236   0.970780    6.409879   69.854372  122.818123  184.758183  331.303691
+      S10 121  255.603306   236.000000 36.008451 38.628681 -36.008451      14.087631       15.112747     -14.087631        16.368085  0.648036   0.980759   33.691840   41.919303   46.543845  117.344322  132.897042
+      S11 122   39.245902    38.000000 20.452850 20.514028  20.452850      52.114613       52.270497      52.114613        53.984284 -1.719227   0.994663   20.690953   22.447312   22.621144   23.090339   23.346052
+
+FREEZE RULE:
+The coefficients above are the coefficients to be used in subsequent analysis.
+No validation-based recalibration, coefficient tuning, or removal of valid observations is permitted.

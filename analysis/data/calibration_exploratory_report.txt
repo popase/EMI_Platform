@@ -1,0 +1,27 @@
+EMI Platform — Calibration Dataset Exploratory Characterization
+====================================================================
+
+N = 1044
+Series = S01, S02, S03, S04, S05, S06, S07
+
+Overall descriptive statistics:
+                         N     mean   median      std     min      p05      p95      max
+SPM72 [W/m²]          1044 509.2002 515.0000 175.9663 61.0000 202.1500 749.0000 791.0000
+PV_Rear current [mA]  1044  83.4751  84.1000  25.7224 11.2000  38.0750 117.9000 123.5000
+
+Pearson r = 0.957494
+Spearman rho = 0.967246
+Diagnostic linear fit: G = 6.550183 * I + -37.577182
+Diagnostic linear R² = 0.916796
+
+Per-series characterization:
+series_id   N  SPM72_mean  SPM72_min  SPM72_max  current_mean  current_min  current_max  Pearson_r  Spearman_rho
+      S01  98    409.6837        335        489       73.3721      61.6000      84.3000     0.9972        0.9994
+      S02 109    706.7890         61        791      117.7991     113.6000     123.5000     0.3923        0.9663
+      S03 231    543.6926         72        756       87.3077      12.7000     118.4000     0.9927        0.9937
+      S04 143    543.3287        464        601       86.5906      74.9000      94.6000     0.9966        0.9944
+      S05 164    680.5549        657        702      106.1671     102.0000     110.3000     0.9918        0.9933
+      S06 164    405.1585        295        501       69.6229      52.0000      83.0000     0.9985        0.9976
+      S07 135    244.9630         62        369       42.4990      11.2000      63.7000     0.9987        0.9982
+
+NOTE: The linear fit is diagnostic only. No calibration model is selected or frozen in this step.

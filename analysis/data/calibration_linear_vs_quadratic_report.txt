@@ -1,0 +1,29 @@
+EMI Platform — Linear vs Quadratic Calibration Comparison
+==============================================================
+
+Calibration observations: 1044
+Validation dataset was not used.
+
+    Model                                       Equation  MAE [W/m²]  RMSE [W/m²]  Bias [W/m²]       R²  Parameters
+   Linear                  G = 6.55018339 I -37.57718215   20.253887    50.733452     0.000000 0.916796           2
+Quadratic G = 0.0055068764 I² +5.72760324 I -10.92475204   18.427467    50.522792     0.000000 0.917485           3
+
+Quadratic RMSE improvement vs linear: 0.42%
+Quadratic MAE improvement vs linear:  9.02%
+
+Per-series metrics:
+series_id     model   N   MAE_Wm2   RMSE_Wm2   Bias_Wm2        R2
+      S01    Linear  98 33.340135  33.522021 -33.340135  0.375337
+      S01 Quadratic  98 29.529329  29.720811 -29.529329  0.508971
+      S02    Linear 109 48.710298 145.280696 -27.239420  0.041733
+      S02 Quadratic 109 44.888945 146.233352 -33.445086  0.029124
+      S03    Linear 231 14.078121  21.602550   9.388056  0.981283
+      S03 Quadratic 231 13.452456  21.297445   9.258745  0.981808
+      S04    Linear 143 13.721352  14.451210  13.721352  0.870497
+      S04 Quadratic 143 16.831489  17.314669  16.831489  0.814092
+      S05    Linear 164 22.718261  22.801159  22.718261 -2.855149
+      S05 Quadratic 164 21.305357  21.443760  21.305357 -2.409802
+      S06    Linear 164 13.306820  13.824375 -13.306820  0.954059
+      S06 Quadratic 164  9.937305  10.461979  -9.937305  0.973689
+      S07    Linear 135 10.711038  12.804214   4.164144  0.983484
+      S07 Quadratic 135  6.024371   6.890825   0.958186  0.995216
