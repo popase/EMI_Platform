@@ -1,0 +1,52 @@
+{
+  "input_root": "data",
+  "output_root": "output",
+  "file_name": "synchronized_measurements.csv",
+  "columns": {
+    "timestamp": [
+      "timestamp",
+      "timestamp_utc",
+      "datetime",
+      "time"
+    ],
+    "spm72": [
+      "spm72_wm2",
+      "SPM72",
+      "SPM72_Wm2",
+      "spm72"
+    ],
+    "pv_rear": [
+      "current_rear",
+      "PV_Rear",
+      "PVRear",
+      "pv_rear",
+      "pvrear",
+      "I_rear",
+      "IRear"
+    ],
+    "sync_difference": [
+      "time_difference_s",
+      "time_diff_s",
+      "delta_t_s",
+      "difference_s",
+      "sync_difference_s"
+    ],
+    "sync_status": [
+      "sync_status",
+      "status",
+      "match_status"
+    ]
+  },
+  "plot": {
+    "dpi": 300,
+    "figure_width": 10,
+    "figure_height": 6,
+    "font_size": 11,
+    "point_size": 20,
+    "alpha": 0.65
+  },
+  "analysis": {
+    "sync_tolerance_seconds": 15.0,
+    "minimum_points_for_correlation": 3
+  }
+}
