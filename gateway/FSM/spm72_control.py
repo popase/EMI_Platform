@@ -315,7 +315,7 @@ def start_series():
     series_dir = SERIES_DIR / series_id
     series_dir.mkdir(parents=True, exist_ok=True)
 
-    csv_file = series_dir / "spm72_readings.csv"
+    csv_file = series_dir / "spm72_readings_raw.csv"
 
     with open(csv_file, "w", newline="") as f:
         csv.writer(f).writerow([
