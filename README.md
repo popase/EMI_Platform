@@ -304,7 +304,7 @@ The analysis workflow must use the frozen calibration and validation definitions
 The final application-specific model is a two-parameter linear relationship between PV current and reference irradiance:
 
 ```text
-G = 6.5501833853 I − 37.5771821527
+G = 6.550 I − 37.577
 ```
 
 where:
