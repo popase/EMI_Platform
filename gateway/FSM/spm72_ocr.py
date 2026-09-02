@@ -89,7 +89,7 @@ def read_spm72(image_path):
     cmd = [
         "ssocr",
         "-d", "3",
-	"-F",
+        "-F",
         "crop",
         str(CROP_X),
         str(CROP_Y),

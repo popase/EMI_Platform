@@ -32,7 +32,7 @@ CROP_H = 350
 # EMI Platform database
 DB_FILE = Path.home() / ".node-red" / "emi_platform.db"
 EXPECTED_NODE_ID = 1
-MAX_RECORD_AGE = 30  # seconds
+MAX_RECORD_AGE = 60  # seconds
 
 # EMI Node
 MODBUS_PORT = "/dev/ttyUSB0"
@@ -386,11 +386,6 @@ def measurement_cycle(series_dir, csv_file):
         )
 
         return False
-
-    except Exception as exc:
-        print(f"{timestamp} | ERROR | {exc}")
-        return False
-
 
 # =================================================
 # Main menu

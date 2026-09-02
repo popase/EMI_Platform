@@ -58,7 +58,7 @@ def load_spm72(path):
     for row in rows:
         status = row.get("status", "").strip()
 
-        # Only valid OCR readings are calibration candidates.
+        # Only valid OCR readings are synchronization candidates.
         if status != "VALID":
             continue
 
