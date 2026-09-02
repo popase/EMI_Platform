@@ -1,4 +1,14 @@
 series_id,category,condition_code,notes
-20260825_163306,local_shading,,local shading event
+20260820_091508,unknown,C0,
 20260820_114939,dynamic_C1,C1,isolated clouds
-# 20260824_XXXXXX,dynamic_C1,C2,rapid cloud variability
+20260820_151336,unknown,C1,
+20260821_100631,unknown,C0,
+20260821_115655,unknown,C0,
+20260821_154849,unknown,C0,
+20260822_163702,unknown,C3,
+20260824_093823,unknown,C4->C3,
+20260824_120328,unknown,C0->C2,
+20260824_163924,unknown,C1,
+20260824_174119,unknown,,umbra
+20260825_163306,local_shading,C0,local shading event
+20260825_173650,unknown,C0,apus / umbra totala
