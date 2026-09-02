@@ -34,10 +34,6 @@ DB_FILE = Path.home() / ".node-red" / "emi_platform.db"
 EXPECTED_NODE_ID = 1
 MAX_RECORD_AGE = 60  # seconds
 
-# EMI Node
-MODBUS_PORT = "/dev/ttyUSB0"
-MODBUS_UNIT_ID = 1
-
 # =================================================
 # States
 # =================================================
