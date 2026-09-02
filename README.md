@@ -191,7 +191,7 @@ Excluded observations are not repaired or reintroduced into the analytical datas
 
 ## 6. Synchronization procedure
 
-Reference measurements from the SPM72 were acquired using the Raspberry Pi camera/OCR subsystem at approximately 30 s intervals.
+Reference measurements from the SPM72 were acquired using the Raspberry Pi USB UVC microscope/OCR subsystem at approximately 30 s intervals.
 
 The EMI Node generated timestamped measurement records in UTC.
 
@@ -224,9 +224,9 @@ Standalone OCR acquisition utility for the SPM72 display.
 Its processing path is:
 
 ```text
-USB camera
+USB UVC microscope
    ↓
-image capture
+image capture on Raspberry Pi
    ↓
 image preprocessing
    ↓
