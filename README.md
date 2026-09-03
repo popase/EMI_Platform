@@ -4,67 +4,103 @@ Repository accompanying the research article:
 
 **EMI Platform: A Modular Embedded Measurement Architecture for Industrial SCADA Systems**
 
-## 1. Overview
+## 1. Purpose and scope
 
-This repository contains the software, experimental data, analysis workflow, and firmware associated with the experimental evaluation of the **EMI Platform**, a modular embedded architecture for intelligent measurement instruments.
+This repository contains the implementation, experimental data, and analysis software supporting the experimental evaluation of the **EMI Platform**.
 
-The repository supports the reproducibility of the experimental results reported in the article. The smart pyranometer is used as an application-specific experimental implementation of the platform; it is not the primary contribution of the work.
+The EMI Platform is the primary contribution of the associated study. The smart pyranometer is an application-specific implementation used to validate the platform; it is not the primary architectural contribution.
 
-The demonstrated system integrates:
+The demonstrated experimental system integrates:
 
 - an Arduino Uno-based EMI Node;
-- RS485/Modbus RTU industrial communication;
+- RS485 / Modbus RTU communication;
 - a Raspberry Pi-based EMI Gateway;
-- Node-RED-based data acquisition and storage;
+- Node-RED for data acquisition and supervisory integration;
 - SQLite data storage;
-- Grafana-based supervisory visualization.
-
----
+- Grafana visualization.
 
 ## 2. Repository structure
+
+The current repository is organized as follows:
 
 ```text
 EMI_Platform/
 ├── README.md
+├── .gitattributes
 ├── series/
+│   └── 13 experimental measurement series
 ├── gateway/
 │   └── FSM/
+│       ├── spm72_control.py
+│       ├── spm72_ocr.py
+│       └── sync_series.py
 ├── analysis/
 │   └── EMI_Dataset/
+│       ├── config.json
+│       ├── series_metadata.csv
+│       ├── requirements.txt
+│       ├── common.py
+│       ├── 01_prepare_dataset.py
+│       ├── 02_scatter_spm72_pvrear.py
+│       ├── 03_timeseries.py
+│       ├── 04_descriptive_report.py
+│       ├── 05_make_all.py
+│       ├── 06_check_input.py
+│       ├── 07_series_diagnostics.py
+│       ├── data/
+│       └── output/
 └── firmware/
+    └── EMI_Node/
+        └── EMI_Node.ino
 ```
 
 ### `series/`
 
-Contains the 13 experimental measurement series retained for the article.
+Contains the 13 experimental measurement series used for the article. The series preserve the measurement files generated and processed during the experimental campaign.
 
-Each experimental series contains the recorded image data and associated measurement files used in the data-processing chain.
+Each final series follows the established structure:
+
+```text
+series/YYYYMMDD_HHMMSS/
+├── spm72_readings_raw.csv
+├── spm72_readings.csv
+├── emi_measurements.csv
+└── synchronized_measurements.csv
+```
+
+The final series correspond to the experimental campaign conducted between 20 and 25 August 2026.
 
 ### `gateway/FSM/`
 
-Contains the Raspberry Pi gateway-side measurement-control and data-processing scripts used during the experimental campaign:
+Contains the Raspberry Pi-side scripts used for the experimental acquisition workflow:
 
-- `spm72_control.py`
-- `spm72_ocr.py`
-- `sync_series.py`
+- `spm72_control.py` — measurement control and series generation;
+- `spm72_ocr.py` — SPM72 OCR acquisition;
+- `sync_series.py` — synchronization of SPM72 and EMI measurements.
 
 ### `analysis/EMI_Dataset/`
 
-Contains the reproducible data-analysis environment, including configuration, common utilities, analysis scripts, input data, and generated outputs.
+Contains the Python analysis environment used to process and diagnose the experimental dataset. Its internal directory structure is part of the reproducibility setup and should be preserved.
 
-The internal directory structure is preserved so that the relative paths used by the analysis scripts remain valid.
+The detailed analysis-specific instructions are provided in:
 
-### `firmware/`
+```text
+analysis/EMI_Dataset/README.md
+```
 
-Contains the firmware used by the experimental EMI Node.
+### `firmware/EMI_Node/`
 
----
+Contains the Arduino firmware used by the experimental EMI Node:
+
+```text
+firmware/EMI_Node/EMI_Node.ino
+```
+
+The firmware implements sensor acquisition and exposure of measurement values through RS485 / Modbus RTU.
 
 ## 3. Experimental data provenance
 
-The raw experimental data are preserved before correction, screening, synchronization, or model fitting.
-
-The data-processing provenance is:
+The repository preserves the experimental data-processing chain from acquisition to synchronized measurements:
 
 ```text
 Raw JPEG images
@@ -81,55 +117,50 @@ spm72_readings.csv
 synchronized_measurements.csv
       │
       ▼
-analytical datasets
+analysis dataset
       │
-      ├── calibration_dataset.csv
-      └── validation_dataset.csv
-      │
-      ▼
-model fitting and independent validation
+      ├── calibration dataset
+      └── validation dataset
 ```
 
-Raw measurements are not modified during analytical processing. Screening and segmentation are applied only to derived analytical datasets.
+The raw OCR files are retained as acquired. Corrected OCR values are stored separately and are used for the synchronized analytical data.
 
----
+## 4. Frozen experimental datasets
 
-## 4. Calibration and validation
+The final analytical datasets used by the article are frozen research artifacts.
 
-The analytical datasets are frozen.
+### Calibration
 
-### Calibration dataset
-
-- Series: S01–S07
-- Measurement dates: 20–22 August 2026
+- Series: **S01–S07**
 - Observations: **1044**
+- Measurement period: **20–22 August 2026**
 
-### Independent validation dataset
+### Independent validation
 
-- Series: S08-A, S08-B, S09, S10, S11
-- Measurement date: 24 August 2026
+- Series/segments: **S08-A, S08-B, S09, S10, S11**
 - Observations: **583**
+- Measurement date: **24 August 2026**
 
-The validation day was kept independent from model estimation. Validation observations were not used for fitting or model selection.
+The validation observations were not used for model estimation or model selection.
 
----
+The analysis package contains both the complete experimental-series input data and the frozen calibration/validation datasets. The frozen datasets must not be silently regenerated or replaced.
 
-## 5. Frozen measurement model
+## 5. Application-specific measurement model
 
-The application-specific irradiance model uses PV current as predictor and the SPM72 reference measurement as response.
+For the smart-pyranometer validation application, PV current is used as the predictor and the SPM72 measurement as the reference response.
 
 The selected model is linear:
 
 ```text
-G = 6.550 I − 37.577
+G = 6.5501833853 × I − 37.5771821527
 ```
 
 where:
 
-- `I` is the PV current in mA;
-- `G` is the estimated irradiance in W/m².
+- `I` is PV current in mA;
+- `G` is estimated irradiance in W/m².
 
-The model was estimated by ordinary least squares using the calibration dataset only and was frozen before independent validation.
+The coefficients were estimated by ordinary least squares using the calibration dataset only and were frozen before independent validation.
 
 Model identifier:
 
@@ -137,58 +168,68 @@ Model identifier:
 EMI-LIN-2026-08-26
 ```
 
-The complete frozen coefficients are preserved in the model artifact.
-
----
+The model is application-specific; it is not part of the reusable core EMI Platform services.
 
 ## 6. Independent validation result
 
-For the independent validation dataset (`N = 583`):
+For the frozen independent validation dataset (`N = 583`):
 
 | Metric | Result |
 |---|---:|
 | MAE | 25.67 W/m² |
 | RMSE | 36.07 W/m² |
 | MBE | 4.44 W/m² |
-| Pearson r | 0.990 |
-| R² | 0.979 |
+| Pearson r | 0.9904 |
+| R² | 0.9791 |
 
-These values correspond to the frozen model and dataset versions included in the repository.
-
----
+These values are the frozen validation results reported in the article.
 
 ## 7. Reproduction workflow
 
-A clean reproduction of the analytical results should follow this order:
+For reproduction of the general data-analysis workflow:
 
 1. Clone the repository.
 2. Preserve the repository directory structure.
 3. Enter `analysis/EMI_Dataset/`.
-4. Verify the paths defined in `config.json`.
-5. Ensure the required Python dependencies are installed.
-6. Run the analysis scripts in their documented order.
-7. Verify the generated datasets and reports.
-8. Verify the frozen calibration/validation split.
-9. Verify the frozen model coefficients.
-10. Compare the generated validation metrics with the reported results.
+4. Create the Python environment described in `analysis/EMI_Dataset/README.md`.
+5. Verify `config.json` and the configured input/output paths.
+6. Run the input check.
+7. Run the analysis pipeline and series diagnostics.
+8. Compare the resulting derived data and diagnostics with the repository contents and frozen research datasets.
 
-The analysis scripts use the repository-relative data structure defined by `config.json` and the shared utilities in `common.py`.
+The main analysis sequence is:
 
----
+```powershell
+python 06_check_input.py
+python 01_prepare_dataset.py
+python 02_scatter_spm72_pvrear.py
+python 03_timeseries.py
+python 04_descriptive_report.py
+python 07_series_diagnostics.py
+```
+
+Alternatively:
+
+```powershell
+python 05_make_all.py
+python 07_series_diagnostics.py
+```
+
+The analysis scripts use repository-relative paths defined through `config.json`; they do not modify the source synchronized measurement files.
+
+The final application-specific model is treated as a frozen research result rather than being automatically refitted by the generic analysis pipeline.
 
 ## 8. Reproducibility boundary
 
-The repository provides the data and software required to reproduce the reported analytical results and to inspect the experimental data-processing chain.
+The repository provides the implementation and experimental data required to inspect and reproduce the reported data-processing workflow and to verify the frozen analytical datasets and validation results.
 
-The repository does not claim that the platform has been experimentally demonstrated across multiple independent instrument types, alternative MCU families, or multi-node deployments. These are architectural objectives and future extensions of the EMI Platform.
+The repository does **not** claim experimental validation of the EMI Platform across multiple independent instrument types, alternative MCU families, or multi-node deployments. Such extensions are outside the present experimental validation scope.
 
-Remote device configuration is not part of the implemented experimental prototype.
+Remote device configuration is not part of the implemented experimental prototype and is outside the scope of the present implementation.
 
----
+## 9. Experimental architecture
 
-## 9. Experimental implementation
-
-The experimental platform consists of:
+The demonstrated system follows this data path:
 
 ```text
 EMI Node
@@ -201,17 +242,26 @@ EMI Gateway
 Node-RED / SQLite
    │
    ▼
-Grafana supervisory visualization
+Grafana
 ```
 
-The SPM72 reference pyranometer and the associated OCR processing belong to the application-specific experimental validation layer.
+The SPM72 reference instrument, USB UVC microscope, and OCR processing belong to the application-specific validation layer.
 
-The Raspberry Pi OCR system uses a **USB UVC microscope** for image acquisition.
+The reusable platform services are therefore distinguishable from the application-specific measurement and validation functionality.
 
----
+## 10. Traceability
 
-## 10. Scope
+The repository distinguishes four levels of research artifacts:
 
-This repository is intended to provide transparent access to the implementation and data supporting the research article.
+1. **Raw experimental evidence** — acquired images and raw OCR output;
+2. **Corrected and synchronized measurements** — processed measurement files associated with each experimental series;
+3. **Frozen analytical datasets** — calibration and independent validation datasets used for the reported model and validation;
+4. **Derived analytical results** — diagnostics, figures, reports, and validation metrics.
 
-The scientific contribution is the **EMI Platform architecture and its separation of application-specific measurement functionality from reusable platform services**. The smart pyranometer is the experimental validation application.
+This separation is intended to preserve traceability between the experimental campaign, the data-processing workflow, and the results reported in the article.
+
+## 11. Scientific scope
+
+The associated study evaluates the **EMI Platform architecture** and its separation of reusable platform services from application-specific measurement functionality.
+
+The smart pyranometer provides the experimental validation case through which the architecture is demonstrated and quantitatively evaluated. The repository should therefore be interpreted primarily as a reproducibility package for the EMI Platform study, not as a standalone pyranometer or metrological-characterization project.
