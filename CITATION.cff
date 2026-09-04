@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+title: "EMI Platform: A Modular Embedded Measurement Architecture for Industrial SCADA Systems"
+type: software
+authors:
+  - given-names: "Sorin Eugen"
+    family-names: "Popa"
+  - given-names: "Iulian"
+    family-names: "Furdu"
+repository-code: "https://github.com/popase/EMI_Platform"
+license: "MIT"
+message: "If you use this repository, please cite it using the metadata provided in this file."
