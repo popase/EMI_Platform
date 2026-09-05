@@ -27,6 +27,8 @@ The current repository is organized as follows:
 EMI_Platform/
 ├── README.md
 ├── .gitattributes
+├── CITATION.cff
+├── LICENSE
 ├── series/
 │   └── 13 experimental measurement series
 ├── gateway/
@@ -266,5 +268,16 @@ The associated study evaluates the **EMI Platform architecture** and its separat
 
 The smart pyranometer provides the experimental validation case through which the architecture is demonstrated and quantitatively evaluated. The repository should therefore be interpreted primarily as a reproducibility package for the EMI Platform study, not as a standalone pyranometer or metrological-characterization project.
 
-## 12 Nomenclature note
+## 12. Nomenclature note
+
 The experimental hardware was originally developed as a laboratory setup comprising an Arduino-based measurement node and two PV channels, denoted as PV_Front and PV_Rear. In the experiments reported in this paper, only the PV_Rear channel was retained for the quantitative analysis. For consistency and readability, this channel is denoted simply as PV throughout the manuscript. The original PV_Rear naming is preserved in the firmware, raw experimental data, and reproducibility repository to maintain correspondence with the implemented hardware and recorded measurements.
+
+## 13. DOI and citation
+
+The reproducibility repository has been archived as version **v1.0.0** with the following DOI:
+
+**10.5281/zenodo.22299289**
+
+The version-specific DOI identifies the frozen repository state associated with the reported experimental study.
+
+For citation of the repository, use the metadata provided in `CITATION.cff`.
